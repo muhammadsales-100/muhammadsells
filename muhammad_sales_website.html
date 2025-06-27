@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Ibrahim - Remote High-Ticket Sales Closer</title>
+    <!-- Tailwind CSS CDN for modern, responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Poppins for a bold and premium feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom CSS variables and base styles */
+        :root {
+            --primary-bg: #0f0f0f;
+            --text-color: #ffffff;
+            --accent-color: #00FF99;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            padding-top: 6rem; /* Added to account for fixed header height */
+        }
+
+        /* Utility classes for animations (fade-in, slide-up, etc.) */
+        .animated-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .animated-element.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Specific animation delays */
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+        .delay-400 { transition-delay: 0.4s; }
+        .delay-500 { transition-delay: 0.5s; }
+        .delay-600 { transition-delay: 0.6s; }
+
+        /* Custom button styling for hover effect */
+        .btn-primary {
+            @apply inline-block px-8 py-4 text-lg font-bold rounded-lg transition-all duration-300 ease-in-out;
+            background-color: var(--accent-color);
+            color: var(--primary-bg); /* Text on accent should be dark */
+            box-shadow: 0 4px 15px rgba(0, 255, 153, 0.3);
+            letter-spacing: 0.05em;
+            position: relative; /* Ensure z-index works */
+            z-index: 10; /* Ensure it's above other elements if any overlap */
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 255, 153, 0.5);
+            background-color: #00E68F; /* Slightly darker accent on hover */
+        }
+
+        /* CTA button in contact section (not used for the direct contact section but keeping class for consistency) */
+        .btn-secondary {
+            @apply inline-block px-8 py-4 text-lg font-bold rounded-lg transition-all duration-300 ease-in-out border-2;
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            background-color: transparent;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 255, 153, 0.3);
+        }
+
+        /* Styling for section headings - kept for potential future use or if styling is needed even without text */
+        .section-heading {
+            @apply text-5xl font-extrabold mb-12 relative pb-4;
+            color: var(--text-color);
+        }
+
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        /* Card styling */
+        .card {
+            @apply bg-gray-800 p-8 rounded-lg shadow-xl;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive adjustments for sections - Increased vertical spacing to py-32 (128px) */
+        section {
+            @apply py-32 px-6 sm:px-10 lg:px-20 min-h-screen flex items-center justify-center;
+        }
+
+        /* Specific hero section height adjustment */
+        #hero {
+            @apply flex items-center justify-center text-center;
+            min-height: calc(100vh - 6rem); /* Adjust min-height to account for padding-top on body */
+        }
+
+        /* Adjust section heading alignment for smaller screens */
+        @media (max-width: 768px) {
+            .section-heading {
+                @apply text-4xl text-center;
+            }
+            .section-heading::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Training & Experience Timeline Styling */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background-color: var(--accent-color);
+            border: 4px solid var(--primary-bg);
+            box-shadow: 0 0 0 2px var(--accent-color);
+            border-radius: 50%; /* Ensure it's a perfect circle */
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item-header {
+            @apply text-2xl font-semibold mb-2 text-white;
+        }
+
+        .timeline-item-description {
+            @apply text-gray-300 text-lg;
+        }
+
+        /* Icon styling for services */
+        .service-icon {
+            color: var(--accent-color);
+            font-size: 3rem; /* Larger icons */
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        /* Adjusted header blur to start slightly lower */
+        .header-bg-blur {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%; /* Height of the header */
+            background-color: rgba(15, 15, 15, 0.8); /* Match primary-bg with transparency */
+            backdrop-filter: blur(8px); /* Tailwind's backdrop-blur-sm is ~4px, making it a bit stronger */
+            -webkit-backdrop-filter: blur(8px);
+            z-index: -1; /* Behind content but above background */
+            pointer-events: none; /* Allows clicks to pass through to elements below */
+            border-bottom-left-radius: 10px; /* Subtle rounding */
+            border-bottom-right-radius: 10px;
+        }
+
+        /* Responsive header padding for the blur to sit correctly */
+        @media (min-width: 768px) {
+            .header-top-padding {
+                padding-top: 1.5rem; /* Equivalent to py-6, ensures blur starts lower */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation (Fixed top) -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-transparent py-6 header-top-padding">
+        <div class="header-bg-blur"></div> <!-- Background blur element -->
+        <nav class="container mx-auto flex justify-between items-center px-6 sm:px-10 lg:px-20 relative z-10">
+            <div class="text-2xl font-bold text-white animated-element delay-100">Muhammad Ibrahim</div>
+            <ul class="hidden md:flex space-x-8">
+                <li><a href="#hero" class="text-white hover:text-gray-300 transition duration-300 animated-element delay-200">Home</a></li>
+                <li><a href="#about" class="text-white hover:text-gray-300 transition duration-300 animated-element delay-300">About</a></li>
+                <li><a href="#services" class="text-white hover:text-gray-300 transition duration-300 animated-element delay-400">Services</a></li>
+                <li><a href="#experience" class="text-white hover:text-gray-300 transition duration-300 animated-element delay-500">Experience</a></li>
+                <li><a href="#testimonials" class="text-white hover:text-gray-300 transition duration-300 animated-element delay-600">Testimonials</a></li>
+                <li><a href="#contact" class="text-white hover:text-gray-300 transition duration-300 animated-element delay-700">Contact</a></li>
+            </ul>
+            <!-- Mobile Menu Button (Hamburger) -->
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 absolute top-full left-0 right-0 pb-4 shadow-lg">
+            <ul class="flex flex-col items-center space-y-4 pt-4">
+                <li><a href="#hero" class="block text-white text-lg hover:text-gray-300 transition duration-300 py-2">Home</a></li>
+                <li><a href="#about" class="block text-white text-lg hover:text-gray-300 transition duration-300 py-2">About</a></li>
+                <li><a href="#services" class="block text-white text-lg hover:text-gray-300 transition duration-300 py-2">Services</a></li>
+                <li><a href="#experience" class="block text-lg text-white hover:text-gray-300 transition duration-300 py-2">Experience</a></li>
+                <li><a href="#testimonials" class="block text-white text-lg hover:text-gray-300 transition duration-300 py-2">Testimonials</a></li>
+                <li><a href="#contact" class="block text-white text-lg hover:text-gray-300 transition duration-300 py-2">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative overflow-hidden">
+        <div class="container mx-auto text-center px-6 sm:px-10 lg:px-20">
+            <h1 class="text-6xl sm:text-7xl lg:text-8xl font-extrabold leading-tight mb-6 animated-element delay-100">
+                <span class="text-white">Close More Deals.</span> <br class="hidden sm:inline-block"><span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-600">Scale Your Business.</span>
+            </h1>
+            <p class="text-xl sm:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto animated-element delay-200">
+                I'm a Remote High-Ticket Sales Closer, masterfully blending NEPQ and NLP to turn conversations into conversions.
+            </p>
+            <!-- Ensured 'appear' class for immediate visibility and animation -->
+            <!-- Added a unique ID for easier direct JavaScript manipulation if needed -->
+            <a href="#contact" id="hero-book-call-btn" class="btn-primary animated-element appear delay-300">Book a Call</a>
+        </div>
+        <!-- Simple background shapes for visual interest -->
+        <div class="absolute inset-0 z-0 opacity-10">
+            <div class="absolute w-64 h-64 bg-accent-color rounded-full blur-3xl opacity-20 -top-20 -left-20 animate-pulse-slow"></div>
+            <div class="absolute w-80 h-80 bg-green-500 rounded-full blur-3xl opacity-15 -bottom-40 -right-40 animate-pulse-slow delay-200"></div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="bg-gray-900">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <!-- Image on Left -->
+            <div class="flex justify-center items-center animated-element delay-200">
+                <img src="https://www.bing.com/images/blob?bcid=RAm9KqXu3Z4IqxcxoNWLuD9SqbotqVTdP5w" alt="Your Professional Photo" class="w-full max-w-sm rounded-lg shadow-2xl transition-transform duration-500 hover:scale-105 border-4 border-accent-color">
+            </div>
+            <!-- Text on Right -->
+            <div class="animated-element">
+                <p class="text-lg text-gray-300 mb-6">
+                    As a dedicated remote high-ticket sales closer, I specialize in transforming complex sales cycles into clear, compelling conversions. My expertise is built on a deep understanding of human psychology and communication, rigorously trained in **Neuro-Emotional Persuasion Questions (NEPQ)** and **Neuro-Linguistic Programming (NLP)**. I pride myself on not just closing deals, but building lasting relationships by truly understanding and addressing clients' needs.
+                </p>
+                <p class="text-lg text-gray-300">
+                    My mission is to empower businesses to achieve exponential revenue growth by implementing ethical, high-impact sales strategies. Whether it's navigating challenging objections or streamlining your sales pipeline, I bring a results-driven mindset coupled with a human-centric approach. Let's unlock your business's full potential together.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mt-16 max-w-4xl mx-auto">
+                <!-- Service Card 1: Remote Closer -->
+                <div class="card animated-element delay-100 text-center">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mx-auto">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v7.5m-6-9h.008v.008h-.008V9Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-4 text-accent-color">Remote Closing</h3>
+                    <p class="text-gray-300">Efficiently qualify and close high-ticket deals remotely, optimizing your sales cycle for maximum conversion.</p>
+                </div>
+                <!-- Service Card 2: Discovery Calls -->
+                <div class="card animated-element delay-200 text-center">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mx-auto">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 10.5h7.5m-7.5 3h7.5m-7.5 3h7.5M12 18v3m-3-3h6m-1.5-12H5.25A2.25 2.25 0 0 0 3 4.5v15c0 1.241.982 2.25 2.25 2.25h13.5A2.25 2.25 0 0 0 21 19.5v-15A2.25 2.25 0 0 0 18.75 3H12V2.25m0 0l-1.5-1.5m1.5 1.5L13.5 2.25M12 2.25V3" />
+                        </svg>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-4 text-accent-color">Discovery Calls</h3>
+                    <p class="text-gray-300">Conduct insightful discovery calls, leveraging NEPQ to uncover prospect needs and motivations, setting the stage for successful closing.</p>
+                </div>
+                <!-- Service Card 3: Full-Cycle Closing -->
+                <div class="card animated-element delay-300 text-center">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mx-auto">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-4 text-accent-color">Full-Cycle Closing</h3>
+                    <p class="text-gray-300">Manage the entire sales process from initial contact to closed deal, ensuring a smooth transition and maximized conversion rates.</p>
+                </div>
+                <!-- Service Card 4: Objection Handling -->
+                <div class="card animated-element delay-400 text-center">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mx-auto">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.389 3.376 2.01 3.376H19.29c1.622 0 2.872-1.876 2.009-3.376L14.7 3.373a1.875 1.875 0 0 0-3.401 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-4 text-accent-color">Objection Handling</h3>
+                    <p class="text-gray-300">Skillfully address and overcome objections using NLP and NEPQ frameworks, turning skepticism into commitment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training & Experience Section -->
+    <section id="experience" class="bg-gray-900">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mt-16">
+                <!-- Training / Expertise -->
+                <div class="animated-element">
+                    <h3 class="text-4xl font-bold mb-8 text-accent-color">My Expertise</h3>
+                    <div class="timeline">
+                        <div class="timeline-item animated-element delay-100">
+                            <h4 class="timeline-item-header">NEPQ Mastery (101 & 2.0)</h4>
+                            <p class="timeline-item-description">I’ve completed Jeremy Miner’s NEPQ 101 and NEPQ 2.0 trainings, which helped me master emotional-based communication, consequence questions, and tonality control. I’ve spent over 30+ hours in full NEPQ mock closes, live roleplays, and objection handling drills.</p>
+                        </div>
+                        <div class="timeline-item animated-element delay-200">
+                            <h4 class="timeline-item-header">NLP & Persuasion Psychology</h4>
+                            <p class="timeline-item-description">I’ve also studied NLP and persuasion psychology from experts like Robert Cialdini and Jordan Belfort, applying these principles in structured practice sessions and mock sales environments.</p>
+                        </div>
+                        <div class="timeline-item animated-element delay-300">
+                            <h4 class="timeline-item-header">Continuous Improvement</h4>
+                            <p class="timeline-item-description">I write my own sales scripts and tailor them to coaching, consulting, and marketing offers. I consistently train in Zoom sessions with other closers to sharpen emotional control, framing, and pressure-free conversions.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ken Automates Experience -->
+                <div class="animated-element delay-300">
+                    <h3 class="text-4xl font-bold mb-8 text-accent-color">My Recent Experience</h3>
+                    <div class="space-y-8">
+                        <div class="card p-6 animated-element delay-400">
+                            <h4 class="text-2xl font-semibold text-white">Ken Automates – Remote</h4>
+                            <p class="text-gray-400 text-sm mb-2">July 2023 – July 2024</p>
+                            <h5 class="text-xl font-medium text-white mb-4">Senior Appointment Closer & Sales Lead</h5>
+                            <p class="text-gray-300">At Ken Automates, I led the inbound sales process, handling full-cycle discovery and closing for service-based and automation offers. I reported directly to the CEO and helped streamline the sales pipeline, delivering consistent revenue by closing warm inbound leads using NEPQ-based frameworks and NLP techniques.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <div class="container mx-auto text-center">
+            <div class="grid grid-cols-1 gap-10 mt-16 max-w-2xl mx-auto">
+                <!-- Testimonial 1 -->
+                <div class="card animated-element delay-100">
+                    <p class="text-xl italic mb-6 text-gray-200">"Muhammad is the type of closer who doesn’t just show up — he takes over. His work ethic, tonality, and emotional intelligence set him apart even early on. I trusted him to close appointments for my agency, and he consistently delivered."</p>
+                    <p class="font-bold text-accent-color text-lg">- Suhaib Haider, CEO of Ken Automates</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / CTA Section -->
+    <section id="contact" class="bg-gray-900 text-center">
+        <div class="container mx-auto max-w-2xl">
+            <p class="text-xl text-accent-color font-bold mb-8 animated-element delay-100">
+                Want to work together? Book a call directly here.
+            </p>
+            <!-- Calendly inline widget begin -->
+            <div class="calendly-inline-widget" data-url="https://calendly.com/muhammad12567ibrahim/30min" style="min-width:320px;height:700px;"></div>
+            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+            <!-- Calendly inline widget end -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary-bg py-8 text-center text-gray-500 text-sm">
+        <p>&copy; 2024 Muhammad Ibrahim. All rights reserved.</p>
+        <p>Built with passion and purpose.</p>
+    </footer>
+
+    <script>
+        // JavaScript for mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+        }
+
+
+        // JavaScript for scroll reveal animations (Intersection Observer)
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.animated-element');
+
+            const observerOptions = {
+                root: null, // relative to the viewport
+                rootMargin: '0px',
+                threshold: 0.1 // 10% of the element must be visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('appear');
+                        observer.unobserve(entry.target); // Stop observing once it's appeared
+                    }
+                });
+            }, observerOptions);
+
+            animatedElements.forEach(element => {
+                // For elements meant to be visible on initial load (like the hero button),
+                // we ensure they have the 'appear' class right away.
+                const rect = element.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom >= 0) {
+                    element.classList.add('appear');
+                } else {
+                    observer.observe(element); // Only observe if not already in view
+                }
+            });
+
+            // Added a specific fix for the hero button to ensure it's always clickable and animated on load
+            const heroBookCallBtn = document.getElementById('hero-book-call-btn');
+            if (heroBookCallBtn) {
+                // Ensure the button starts with 'animated-element' and 'delay-300' classes, then immediately adds 'appear'
+                // This forces its animation on load, making it visible and clickable.
+                heroBookCallBtn.classList.add('animated-element', 'delay-300', 'appear');
+            }
+        });
+    </script>
+</body>
+</html>
